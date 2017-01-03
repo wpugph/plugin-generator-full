@@ -112,6 +112,13 @@ class WordPress_Plugin_Template_Settings {
 			'description'			=> __( 'These are fairly standard form input fields.', 'wordpress-plugin-template' ),
 			'fields'				=> array(
 				array(
+					'id' 			=> 'cb_reset',
+					'label'			=> __( 'Reset All when deactivated', 'wordpress-plugin-template' ),
+					'description'	=> __( '', 'wordpress-plugin-template' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+				array(
 					'id' 			=> 'text_field',
 					'label'			=> __( 'Some Text' , 'wordpress-plugin-template' ),
 					'description'	=> __( 'This is a standard text field.', 'wordpress-plugin-template' ),

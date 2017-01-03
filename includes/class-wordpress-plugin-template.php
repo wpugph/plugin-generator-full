@@ -96,6 +96,8 @@ class WordPress_Plugin_Template {
 
 		register_activation_hook( $this->file, array( $this, 'install' ) );
 
+		register_deactivation_hook( $this->file, array( $this, 'plugin_deactivated' ) );
+
 		// Load frontend JS & CSS
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 10 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 10 );
@@ -254,13 +256,56 @@ class WordPress_Plugin_Template {
 
 	/**
 	 * Installation. Runs on activation.
+	 * If reset option is still new meaning this is the first time th plugins is installed, it will call all the default values
 	 * @access  public
 	 * @since   1.0.0
 	 * @return  void
 	 */
 	public function install () {
 		$this->_log_version_number();
+		if ( ( empty ( get_option ('wpt_cb_reset') ) ) ) {
+			$this->default_option_values ();
+		}
 	} // End install ()
+
+	/**
+	 * This contains the default values
+	 * @access  public
+	 * @since   1.0.0
+	 * @return  void
+	 */
+
+	public function default_option_values () {
+		add_option ( 'pdhs1_cb_reset', '' ); // assign on to set checkboxes
+	}
+
+	/**
+	 *  Deletes all options in the specified array
+	 * @access  public
+	 * @since   1.0.0
+	 * @param  array $option_names      names of the options to be deleted
+	 * @return  void
+	 */
+	public function remove_all_options ( $option_names ) {
+		foreach ( $option_names as $option_name ) {
+			delete_option ( $option_name );
+		}
+	}
+
+	/**
+	 *  Runs when plugin is deactivated.
+	 * @access  public
+	 * @since   1.0.0
+	 * @return  void
+	 */
+	public function plugin_deactivated () {
+		if ( !empty ( get_option ( 'pdhs1_cb_reset' ) ) ) {
+			$option_names = array(
+					'pdhs1_cb_reset',
+				);
+			$this->remove_all_options ( $option_names );
+		}
+	}
 
 	/**
 	 * Log the plugin version number.
