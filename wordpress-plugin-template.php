@@ -10,9 +10,9 @@
  * Tested up to: 4.0
  *
  * Text Domain: wordpress-plugin-template
- * Domain Path: /lang/
+ * Domain Path: /languages/
  *
- * @package WordPress
+ * @package WordPress Plugin Template
  * @author Carl Alberto
  * @since 1.0.0
  */
@@ -36,7 +36,7 @@ require_once( 'includes/lib/class-wordpress-plugin-template-taxonomy.php' );
  * @since  1.0.0
  * @return object WordPress_Plugin_Template
  */
-function WordPress_Plugin_Template () {
+function wordpress_plugin_template() {
 	$instance = WordPress_Plugin_Template::instance( __FILE__, '1.0.0' );
 
 	if ( is_null( $instance->settings ) ) {
@@ -46,4 +46,4 @@ function WordPress_Plugin_Template () {
 	return $instance;
 }
 
-WordPress_Plugin_Template();
+wordpress_plugin_template();
