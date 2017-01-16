@@ -66,6 +66,10 @@ cp readme.txt readme.tmp
 sed "s/$DEFAULT_NAME/$NAME/g" readme.tmp > readme.txt
 rm readme.tmp
 
+#cp uninstall.php uninstall.tmp
+#sed "s/$DEFAULT_NAME/$NAME/g" uninstall.tmp > uninstall.php
+#rm uninstall.tmp
+
 
 cd lang
 mv $DEFAULT_SLUG.pot $SLUG.pot
