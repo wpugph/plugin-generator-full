@@ -4,7 +4,7 @@
  * Version: 1.0
  * Plugin URI: https://carl.alber2.com/
  * Description: This is your starter template for your next WordPress plugin.
- * Author: Carl Alberto
+ * Author: Carl A
  * Author URI: https://carl.alber2.com/
  * Requires at least: 4.0
  * Tested up to: 4.0
@@ -13,7 +13,7 @@
  * Domain Path: /languages/
  *
  * @package WordPress Plugin Template
- * @author Carl Alberto
+ * @author Carl A
  * @since 1.0.0
  */
 

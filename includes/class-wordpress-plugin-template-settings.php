@@ -1,11 +1,24 @@
 <?php
+/**
+ * Contains class for the settings.
+ *
+ * @package WordPress Plugin Template \ Settings
+ * @author Carl A
+ * @since 1.0.0
+ */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
+/**
+ * Class used for the plugin setting.
+ */
 class WordPress_Plugin_Template_Settings {
 
 	/**
 	 * The single instance of WordPress_Plugin_Template_Settings.
+	 *
 	 * @var 	object
 	 * @access  private
 	 * @since 	1.0.0
@@ -14,6 +27,7 @@ class WordPress_Plugin_Template_Settings {
 
 	/**
 	 * The main plugin object.
+	 *
 	 * @var 	object
 	 * @access  public
 	 * @since 	1.0.0
@@ -22,6 +36,7 @@ class WordPress_Plugin_Template_Settings {
 
 	/**
 	 * Prefix for plugin settings.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -30,27 +45,34 @@ class WordPress_Plugin_Template_Settings {
 
 	/**
 	 * Available settings for plugin.
+	 *
 	 * @var     array
 	 * @access  public
 	 * @since   1.0.0
 	 */
 	public $settings = array();
 
-	public function __construct ( $parent ) {
+	/**
+	 * Available settings for plugin.
+	 *
+	 * @param object $parent contains the parent object.
+	 */
+	public function __construct( $parent ) {
 		$this->parent = $parent;
 
+		// Change this to make your plugin settings unique.
 		$this->base = 'wpt_';
 
-		// Initialise settings
+		// Initialise settings.
 		add_action( 'init', array( $this, 'init_settings' ), 11 );
 
-		// Register plugin settings
+		// Register plugin settings.
 		add_action( 'admin_init' , array( $this, 'register_settings' ) );
 
-		// Add settings page to menu
+		// Add settings page to menu.
 		add_action( 'admin_menu' , array( $this, 'add_menu_item' ) );
 
-		// Add settings link to plugins page
+		// Add settings link to plugins page.
 		add_filter( 'plugin_action_links_' . plugin_basename( $this->parent->file ) , array( $this, 'add_settings_link' ) );
 	}
 

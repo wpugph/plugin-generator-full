@@ -20,11 +20,13 @@ DEFAULT_CLASS=${DEFAULT_NAME// /_}
 DEFAULT_TOKEN=$( tr '[A-Z]' '[a-z]' <<< $DEFAULT_CLASS)
 DEFAULT_SLUG=${DEFAULT_TOKEN//_/-}
 DEFAULT_SMALLCASE="wordpress_plugin_template"
+DEFAULT_AUTHOR="Carl A"
 
 CLASS=${NAME// /_}
 TOKEN=$( tr '[A-Z]' '[a-z]' <<< $CLASS)
 SLUG=${TOKEN//_/-}
 SMALLCASE=TOKEN
+AUTHOR="Carl Alberto"
 
 git clone https://github.com/wpugph/plugin-generator-full $FOLDER/$SLUG
 
@@ -66,6 +68,10 @@ rm $SLUG.tmp
 
 cp $SLUG.php $SLUG.tmp
 sed "s/$DEFAULT_SMALLCASE/$SMALLCASE/g" $SLUG.tmp > $SLUG.php
+rm $SLUG.tmp
+
+cp $SLUG.php $SLUG.tmp
+sed "s/$DEFAULT_AUTHOR/$AUTHOR/g" $SLUG.tmp > $SLUG.php
 rm $SLUG.tmp
 
 cp readme.txt readme.tmp
