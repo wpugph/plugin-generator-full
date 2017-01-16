@@ -1,16 +1,15 @@
-# Copyright (C) 2014 WordPress Plugin Template
+# Copyright (C) 2017 WordPress Plugin Template
 # This file is distributed under the same license as the WordPress Plugin Template package.
 msgid ""
 msgstr ""
 "Project-Id-Version: WordPress Plugin Template 1.0\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/WordPress-Plugin-Template\n"
-"POT-Creation-Date: 2014-04-07 11:28:06+00:00\n"
+"Report-Msgid-Bugs-To: https://carl.alber2.om\n"
+"POT-Creation-Date: 2017-01-01 11:28:06+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: Carl Alberto <carl@alber2.com>\n"
 
 #: classes/post-types/class-wordpress-plugin-template-post_type.php:52
 #: includes/post-types/class-wordpress-plugin-template-post_type.php:42
@@ -394,14 +393,14 @@ msgstr ""
 msgid "WordPress Plugin Template"
 msgstr ""
 
-#. Plugin URI of the plugin/theme
-msgid "http://www.hughlashbrooke.com/"
+#. Plugin URI of the plugin
+msgid "https://profiles.wordpress.org/carl-alberto#content-plugins"
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Hugh Lashbrooke"
+msgid "Carl Alberto"
 msgstr ""
 
-#. Author URI of the plugin/theme
-msgid "http://www.hughlashbrooke.com/"
+#. Author URI of the plugin
+msgid "https://carl@alber2.com/"
 msgstr ""
