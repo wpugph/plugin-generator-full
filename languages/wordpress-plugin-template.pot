@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Carl Alberto <carl@alber2.com>\n"
+"Last-Translator: Carl A <carl@alber2.com>\n"
 
 #: classes/post-types/class-wordpress-plugin-template-post_type.php:52
 #: includes/post-types/class-wordpress-plugin-template-post_type.php:42

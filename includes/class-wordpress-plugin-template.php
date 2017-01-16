@@ -1,6 +1,15 @@
 <?php
+/**
+ * Contains class for the plugin.
+ *
+ * @package WordPress Plugin Template \ Main
+ * @author Carl A
+ * @since 1.0.0
+ */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class WordPress_Plugin_Template {
 

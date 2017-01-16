@@ -102,6 +102,10 @@ cp $SLUG.pot $SLUG.tmp
 sed "s/$DEFAULT_SLUG/$SLUG/g" $SLUG.tmp > $SLUG.pot
 rm $SLUG.tmp
 
+cp $SLUG.pot $SLUG.tmp
+sed "s/$DEFAULT_AUTHOR/$AUTHOR/g" $SLUG.tmp > $SLUG.pot
+rm $SLUG.tmp
+
 
 cd ../includes
 mv class-$DEFAULT_SLUG.php class-$SLUG.php
@@ -118,8 +122,12 @@ cp class-$SLUG.php class-$SLUG.tmp
 sed "s/$DEFAULT_SLUG/$SLUG/g" class-$SLUG.tmp > class-$SLUG.php
 rm class-$SLUG.tmp
 
+cp class-$SLUG.php class-$SLUG.tmp
+sed "s/$DEFAULT_AUTHOR/$AUTHOR/g" class-$SLUG.tmp > class-$SLUG.php
+rm class-$SLUG.tmp
 
 mv class-$DEFAULT_SLUG-settings.php class-$SLUG-settings.php
+
 
 cp class-$SLUG-settings.php class-$SLUG-settings.tmp
 sed "s/$DEFAULT_CLASS/$CLASS/g" class-$SLUG-settings.tmp > class-$SLUG-settings.php
@@ -131,6 +139,10 @@ rm class-$SLUG-settings.tmp
 
 cp class-$SLUG-settings.php class-$SLUG-settings.tmp
 sed "s/$DEFAULT_SLUG/$SLUG/g" class-$SLUG-settings.tmp > class-$SLUG-settings.php
+rm class-$SLUG-settings.tmp
+
+cp class-$SLUG-settings.php class-$SLUG-settings.tmp
+sed "s/$DEFAULT_AUTHOR/$AUTHOR/g" class-$SLUG-settings.tmp > class-$SLUG-settings.php
 rm class-$SLUG-settings.tmp
 
 
@@ -149,6 +161,10 @@ cp class-$SLUG-post-type.php class-$SLUG-post-type.tmp
 sed "s/$DEFAULT_SLUG/$SLUG/g" class-$SLUG-post-type.tmp > class-$SLUG-post-type.php
 rm class-$SLUG-post-type.tmp
 
+cp class-$SLUG-post-type.php class-$SLUG-post-type.tmp
+sed "s/$DEFAULT_AUTHOR/$AUTHOR/g" class-$SLUG-post-type.tmp > class-$SLUG-post-type.php
+rm class-$SLUG-post-type.tmp
+
 
 mv class-$DEFAULT_SLUG-taxonomy.php class-$SLUG-taxonomy.php
 
@@ -164,6 +180,10 @@ cp class-$SLUG-taxonomy.php class-$SLUG-taxonomy.tmp
 sed "s/$DEFAULT_SLUG/$SLUG/g" class-$SLUG-taxonomy.tmp > class-$SLUG-taxonomy.php
 rm class-$SLUG-taxonomy.tmp
 
+cp class-$SLUG-taxonomy.php class-$SLUG-taxonomy.tmp
+sed "s/$DEFAULT_AUTHOR/$AUTHOR/g" class-$SLUG-taxonomy.tmp > class-$SLUG-taxonomy.php
+rm class-$SLUG-taxonomy.tmp
+
 
 mv class-$DEFAULT_SLUG-admin-api.php class-$SLUG-admin-api.php
 
@@ -177,6 +197,10 @@ rm class-$SLUG-admin-api.tmp
 
 cp class-$SLUG-admin-api.php class-$SLUG-admin-api.tmp
 sed "s/$DEFAULT_SLUG/$SLUG/g" class-$SLUG-admin-api.tmp > class-$SLUG-admin-api.php
+rm class-$SLUG-admin-api.tmp
+
+cp class-$SLUG-admin-api.php class-$SLUG-admin-api.tmp
+sed "s/$DEFAULT_AUTHOR/$AUTHOR/g" class-$SLUG-admin-api.tmp > class-$SLUG-admin-api.php
 rm class-$SLUG-admin-api.tmp
 
 

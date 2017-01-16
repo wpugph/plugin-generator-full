@@ -1,6 +1,15 @@
 <?php
+/**
+ * Contains class for the post type.
+ *
+ * @package WordPress Plugin Template \ Post Type
+ * @author Carl A
+ * @since 1.0.0
+ */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class WordPress_Plugin_Template_Post_Type {
 

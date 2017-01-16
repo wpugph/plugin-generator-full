@@ -1,6 +1,15 @@
 <?php
+/**
+ * Contains class for the taxonomy.
+ *
+ * @package WordPress Plugin Template \ Taxonomy
+ * @author Carl A
+ * @since 1.0.0
+ */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class WordPress_Plugin_Template_Taxonomy {
 
