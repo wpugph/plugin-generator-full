@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DEFAULT_DIR="/Applications/XAMPP/htdocs/test1/wp-content/plugins/"
+cd $DEFAULT_DIR
+
 printf "Plugin name: "
 read NAME
 
@@ -24,6 +27,7 @@ SLUG=${TOKEN//_/-}
 git clone https://github.com/wpugph/plugin-generator-full $FOLDER/$SLUG
 
 echo "Removing git files..."
+$FOLDER = $DEFAULT_DIR
 
 mkdir -p $FOLDER
 cd $FOLDER/$SLUG
