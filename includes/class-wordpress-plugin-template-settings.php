@@ -61,7 +61,7 @@ class WordPress_Plugin_Template_Settings {
 		$this->parent = $parent;
 
 		// Change this to make your plugin settings unique.
-		$this->base = 'wpt_';
+		$this->base = 'pdhs1_';
 
 		// Initialise settings.
 		add_action( 'init', array( $this, 'init_settings' ), 11 );
@@ -77,35 +77,38 @@ class WordPress_Plugin_Template_Settings {
 	}
 
 	/**
-	 * Initialise settings
+	 * Initialise settings.
+	 *
 	 * @return void
 	 */
-	public function init_settings () {
+	public function init_settings() {
 		$this->settings = $this->settings_fields();
 	}
 
 	/**
-	 * Add settings page to admin menu
+	 * Add settings page to admin menu.
+	 *
 	 * @return void
 	 */
-	public function add_menu_item () {
+	public function add_menu_item() {
 		$page = add_options_page( __( 'Plugin Settings', 'wordpress-plugin-template' ) , __( 'Plugin Settings', 'wordpress-plugin-template' ) , 'manage_options' , $this->parent->_token . '_settings' ,  array( $this, 'settings_page' ) );
 		add_action( 'admin_print_styles-' . $page, array( $this, 'settings_assets' ) );
 	}
 
 	/**
-	 * Load settings JS & CSS
+	 * Load settings JS & CSS.
+	 *
 	 * @return void
 	 */
-	public function settings_assets () {
+	public function settings_assets() {
 
 		// We're including the farbtastic script & styles here because they're needed for the colour picker
-		// If you're not including a colour picker field then you can leave these calls out as well as the farbtastic dependency for the wpt-admin-js script below
+		// If you're not including a colour picker field then you can leave these calls out as well as the farbtastic dependency for the wpt-admin-js script below.
 		wp_enqueue_style( 'farbtastic' );
-    	wp_enqueue_script( 'farbtastic' );
+		wp_enqueue_script( 'farbtastic' );
 
-    	// We're including the WP media scripts here because they're needed for the image upload field
-    	// If you're not including an image upload then you can leave this function call out
+    	// We're including the WP media scripts here because they're needed for the image upload field.
+		// If you're not including an image upload then you can leave this function call out.
     	wp_enqueue_media();
 
     	wp_register_script( $this->parent->_token . '-settings-js', $this->parent->assets_url . 'js/settings' . $this->parent->script_suffix . '.js', array( 'farbtastic', 'jquery' ), '1.0.0' );
@@ -113,11 +116,12 @@ class WordPress_Plugin_Template_Settings {
 	}
 
 	/**
-	 * Add settings link to plugin list table
-	 * @param  array $links Existing links
+	 * Add settings link to plugin list table.
+	 *
+	 * @param  array $links Existing links.
 	 * @return array 		Modified links
 	 */
-	public function add_settings_link ( $links ) {
+	public function add_settings_link( $links ) {
 		$settings_link = '<a href="options-general.php?page=' . $this->parent->_token . '_settings">' . __( 'Settings', 'wordpress-plugin-template' ) . '</a>';
   		array_push( $links, $settings_link );
   		return $links;
