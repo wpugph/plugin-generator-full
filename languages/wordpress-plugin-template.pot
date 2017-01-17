@@ -398,7 +398,7 @@ msgid "https://profiles.wordpress.org/carl-alberto#content-plugins"
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Carl Alberto"
+msgid "Carl A"
 msgstr ""
 
 #. Author URI of the plugin
