@@ -11,10 +11,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Class used for the main plugin functions.
+ */
 class WordPress_Plugin_Template {
 
 	/**
 	 * The single instance of WordPress_Plugin_Template.
+	 *
 	 * @var 	object
 	 * @access  private
 	 * @since 	1.0.0
@@ -23,6 +27,7 @@ class WordPress_Plugin_Template {
 
 	/**
 	 * Settings class object
+	 *
 	 * @var     object
 	 * @access  public
 	 * @since   1.0.0
@@ -31,6 +36,7 @@ class WordPress_Plugin_Template {
 
 	/**
 	 * The version number.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -39,6 +45,7 @@ class WordPress_Plugin_Template {
 
 	/**
 	 * The token.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -47,6 +54,7 @@ class WordPress_Plugin_Template {
 
 	/**
 	 * The main plugin file.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -55,6 +63,7 @@ class WordPress_Plugin_Template {
 
 	/**
 	 * The main plugin directory.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -63,6 +72,7 @@ class WordPress_Plugin_Template {
 
 	/**
 	 * The plugin assets directory.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -71,6 +81,7 @@ class WordPress_Plugin_Template {
 
 	/**
 	 * The plugin assets URL.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -79,6 +90,7 @@ class WordPress_Plugin_Template {
 
 	/**
 	 * Suffix for Javascripts.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -87,15 +99,18 @@ class WordPress_Plugin_Template {
 
 	/**
 	 * Constructor function.
+	 *
 	 * @access  public
 	 * @since   1.0.0
+	 * @param string $file Name of this file.
+	 * @param string $version Version of this plugin.
 	 * @return  void
 	 */
-	public function __construct ( $file = '', $version = '1.0.0' ) {
+	public function __construct( $file = '', $version = '1.0.0' ) {
 		$this->_version = $version;
 		$this->_token = 'wordpress_plugin_template';
 
-		// Load plugin environment variables
+		// Load plugin environment variables.
 		$this->file = $file;
 		$this->dir = dirname( $this->file );
 		$this->assets_dir = trailingslashit( $this->dir ) . 'assets';
@@ -107,53 +122,59 @@ class WordPress_Plugin_Template {
 
 		register_deactivation_hook( $this->file, array( $this, 'plugin_deactivated' ) );
 
-		// Load frontend JS & CSS
+		// Load frontend JS & CSS.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 10 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 10 );
 
-		// Load admin JS & CSS
+		// Load admin JS & CSS.
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 10, 1 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_styles' ), 10, 1 );
 
-		// Load API for generic admin functions
+		// Load API for generic admin functions.
 		if ( is_admin() ) {
 			$this->admin = new WordPress_Plugin_Template_Admin_API();
 		}
 
-		// Handle localisation
+		// Handle localisation.
 		$this->load_plugin_textdomain();
 		add_action( 'init', array( $this, 'load_localisation' ), 0 );
 	} // End __construct ()
 
 	/**
-	 * Wrapper function to register a new post type
-	 * @param  string $post_type   Post type name
-	 * @param  string $plural      Post type item plural name
-	 * @param  string $single      Post type item single name
-	 * @param  string $description Description of post type
-	 * @return object              Post type class object
+	 * Wrapper function to register a new post type.
+	 *
+	 * @param  string $post_type	Post type name.
+	 * @param  string $plural		Post type item plural name.
+	 * @param  string $single		Post type item single name.
+	 * @param  string $description	Description of post type.
+	 * @param  string $options		Options when registering a post type.
+	 * @return object              Post type class object.
 	 */
-	public function register_post_type ( $post_type = '', $plural = '', $single = '', $description = '', $options = array() ) {
+	public function register_post_type( $post_type = '', $plural = '', $single = '', $description = '', $options = array() ) {
 
-		if ( ! $post_type || ! $plural || ! $single ) return;
-
+		if ( ! $post_type || ! $plural || ! $single ) {
+			return;
+		}
 		$post_type = new WordPress_Plugin_Template_Post_Type( $post_type, $plural, $single, $description, $options );
 
 		return $post_type;
 	}
 
 	/**
-	 * Wrapper function to register a new taxonomy
-	 * @param  string $taxonomy   Taxonomy name
-	 * @param  string $plural     Taxonomy single name
-	 * @param  string $single     Taxonomy plural name
-	 * @param  array  $post_types Post types to which this taxonomy applies
-	 * @return object             Taxonomy class object
+	 * Wrapper function to register a new taxonomy.
+	 *
+	 * @param  string $taxonomy   Taxonomy name.
+	 * @param  string $plural     Taxonomy single name.
+	 * @param  string $single     Taxonomy plural name.
+	 * @param  array  $post_types Post types to which this taxonomy applies.
+	 * @param  array  $taxonomy_args Args when cerating a taxonomy.
+	 * @return object             Taxonomy class object.
 	 */
-	public function register_taxonomy ( $taxonomy = '', $plural = '', $single = '', $post_types = array(), $taxonomy_args = array() ) {
+	public function register_taxonomy( $taxonomy = '', $plural = '', $single = '', $post_types = array(), $taxonomy_args = array() ) {
 
-		if ( ! $taxonomy || ! $plural || ! $single ) return;
-
+		if ( ! $taxonomy || ! $plural || ! $single ) {
+			return;
+		}
 		$taxonomy = new WordPress_Plugin_Template_Taxonomy( $taxonomy, $plural, $single, $post_types, $taxonomy_args );
 
 		return $taxonomy;
@@ -161,65 +182,73 @@ class WordPress_Plugin_Template {
 
 	/**
 	 * Load frontend CSS.
+	 *
 	 * @access  public
 	 * @since   1.0.0
 	 * @return void
 	 */
-	public function enqueue_styles () {
+	public function enqueue_styles() {
 		wp_register_style( $this->_token . '-frontend', esc_url( $this->assets_url ) . 'css/frontend.css', array(), $this->_version );
 		wp_enqueue_style( $this->_token . '-frontend' );
 	} // End enqueue_styles ()
 
 	/**
 	 * Load frontend Javascript.
+	 *
 	 * @access  public
 	 * @since   1.0.0
 	 * @return  void
 	 */
-	public function enqueue_scripts () {
+	public function enqueue_scripts() {
 		wp_register_script( $this->_token . '-frontend', esc_url( $this->assets_url ) . 'js/frontend' . $this->script_suffix . '.js', array( 'jquery' ), $this->_version );
 		wp_enqueue_script( $this->_token . '-frontend' );
 	} // End enqueue_scripts ()
 
 	/**
 	 * Load admin CSS.
+	 *
 	 * @access  public
 	 * @since   1.0.0
+	 * @param	srting $hook Can be blank at the moment.
 	 * @return  void
 	 */
-	public function admin_enqueue_styles ( $hook = '' ) {
+	public function admin_enqueue_styles( $hook = '' ) {
 		wp_register_style( $this->_token . '-admin', esc_url( $this->assets_url ) . 'css/admin.css', array(), $this->_version );
 		wp_enqueue_style( $this->_token . '-admin' );
 	} // End admin_enqueue_styles ()
 
 	/**
 	 * Load admin Javascript.
+	 *
 	 * @access  public
 	 * @since   1.0.0
+	 * @param	string $hook Can be blank at the moment.
 	 * @return  void
 	 */
-	public function admin_enqueue_scripts ( $hook = '' ) {
+	public function admin_enqueue_scripts( $hook = '' ) {
 		wp_register_script( $this->_token . '-admin', esc_url( $this->assets_url ) . 'js/admin' . $this->script_suffix . '.js', array( 'jquery' ), $this->_version );
 		wp_enqueue_script( $this->_token . '-admin' );
 	} // End admin_enqueue_scripts ()
 
 	/**
-	 * Load plugin localisation
+	 * Load plugin localisation.
+	 *
 	 * @access  public
 	 * @since   1.0.0
 	 * @return  void
 	 */
-	public function load_localisation () {
+	public function load_localisation() {
 		load_plugin_textdomain( 'wordpress-plugin-template', false, dirname( plugin_basename( $this->file ) ) . '/languages/' );
 	} // End load_localisation ()
 
 	/**
-	 * Load plugin textdomain
+	 * Load plugin textdomain.
+	 *
 	 * @access  public
 	 * @since   1.0.0
 	 * @return  void
 	 */
-	public function load_plugin_textdomain () {
+	public function load_plugin_textdomain() {
 	    $domain = 'wordpress-plugin-template';
 
 	    $locale = apply_filters( 'plugin_locale', get_locale(), $domain );
@@ -229,16 +258,18 @@ class WordPress_Plugin_Template {
 	} // End load_plugin_textdomain ()
 
 	/**
-	 * Main WordPress_Plugin_Template Instance
+	 * Main WordPress_Plugin_Template Instance.
 	 *
 	 * Ensures only one instance of WordPress_Plugin_Template is loaded or can be loaded.
 	 *
 	 * @since 1.0.0
 	 * @static
 	 * @see WordPress_Plugin_Template()
+	 * @param string $file Name of this file.
+	 * @param string $version Version of this plugin.
 	 * @return Main WordPress_Plugin_Template instance
 	 */
-	public static function instance ( $file = '', $version = '1.0.0' ) {
+	public static function instance( $file = '', $version = '1.0.0' ) {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self( $file, $version );
 		}
@@ -250,8 +281,8 @@ class WordPress_Plugin_Template {
 	 *
 	 * @since 1.0.0
 	 */
-	public function __clone () {
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?' ), $this->_version );
+	public function __clone() {
+		_doing_it_wrong( __FUNCTION__, esc_html_e( 'Cheatin&#8217; huh?', 'wordpress-plugin-template' ), esc_html( $this->parent->_version ) );
 	} // End __clone ()
 
 	/**
@@ -259,70 +290,75 @@ class WordPress_Plugin_Template {
 	 *
 	 * @since 1.0.0
 	 */
-	public function __wakeup () {
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?' ), $this->_version );
+	public function __wakeup() {
+		_doing_it_wrong( __FUNCTION__, esc_html_e( 'Cheatin&#8217; huh?', 'wordpress-plugin-template' ), esc_html( $this->parent->_version ) );
 	} // End __wakeup ()
 
 	/**
 	 * Installation. Runs on activation.
-	 * If reset option is still new meaning this is the first time th plugins is installed, it will call all the default values
+	 * If reset option is still new meaning this is the first time th plugins is installed, it will call all the default values.
+	 *
 	 * @access  public
 	 * @since   1.0.0
 	 * @return  void
 	 */
-	public function install () {
+	public function install() {
 		$this->_log_version_number();
-		if ( ( empty ( get_option ('wpt_cb_reset') ) ) ) {
-			$this->default_option_values ();
+		if ( ( empty( get_option( $this->base . 'cb_reset' ) ) ) ) {
+			$this->default_option_values();
 		}
 	} // End install ()
 
 	/**
-	 * This contains the default values
+	 * This contains the default values.
+	 *
 	 * @access  public
 	 * @since   1.0.0
 	 * @return  void
 	 */
-
-	public function default_option_values () {
-		add_option ( 'pdhs1_cb_reset', '' ); // assign on to set checkboxes
+	public function default_option_values() {
+		// assign ON to set checkboxes.
+		add_option( $this->base . 'cb_reset', '' );
 	}
 
 	/**
-	 *  Deletes all options in the specified array
+	 *  Deletes all options in the specified array. Normally this is the place to reset your options.
+	 *
 	 * @access  public
 	 * @since   1.0.0
-	 * @param  array $option_names      names of the options to be deleted
+	 * @param  array $option_names      names of the options to be deleted.
 	 * @return  void
 	 */
-	public function remove_all_options ( $option_names ) {
+	public function remove_all_options( $option_names ) {
 		foreach ( $option_names as $option_name ) {
-			delete_option ( $option_name );
+			delete_option( $option_name );
 		}
 	}
 
 	/**
 	 *  Runs when plugin is deactivated.
+	 *
 	 * @access  public
 	 * @since   1.0.0
 	 * @return  void
 	 */
-	public function plugin_deactivated () {
-		if ( !empty ( get_option ( 'pdhs1_cb_reset' ) ) ) {
+	public function plugin_deactivated() {
+		if ( ! empty( get_option( $this->base . 'cb_reset' ) ) ) {
 			$option_names = array(
-					'pdhs1_cb_reset',
+					$this->base . 'cb_reset',
 				);
-			$this->remove_all_options ( $option_names );
+			$this->remove_all_options( $option_names );
 		}
 	}
 
 	/**
 	 * Log the plugin version number.
+	 *
 	 * @access  public
 	 * @since   1.0.0
 	 * @return  void
 	 */
-	private function _log_version_number () {
+	private function _log_version_number() {
 		update_option( $this->_token . '_version', $this->_version );
 	} // End _log_version_number ()
 
