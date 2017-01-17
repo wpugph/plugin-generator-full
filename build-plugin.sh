@@ -31,7 +31,7 @@ AUTHOR="Carl Alberto"
 git clone https://github.com/wpugph/plugin-generator-full $FOLDER/$SLUG
 
 echo "Removing git files..."
-$FOLDER=$DEFAULT_DIR
+#$FOLDER=$DEFAULT_DIR
 
 mkdir -p $FOLDER
 cd $FOLDER/$SLUG
