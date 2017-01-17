@@ -21,12 +21,14 @@ DEFAULT_TOKEN=$( tr '[A-Z]' '[a-z]' <<< $DEFAULT_CLASS)
 DEFAULT_SLUG=${DEFAULT_TOKEN//_/-}
 DEFAULT_SMALLCASE="wordpress_plugin_template"
 DEFAULT_AUTHOR="Carl A"
+DEFAULT_SETTINGS_PREFIX="pdhs1_"
 
 CLASS=${NAME// /_}
 TOKEN=$( tr '[A-Z]' '[a-z]' <<< $CLASS)
 SLUG=${TOKEN//_/-}
 SMALLCASE=TOKEN
 AUTHOR="Carl Alberto"
+SETTINGS_PREFIX="pdhs1_"
 
 git clone https://github.com/wpugph/plugin-generator-full $FOLDER/$SLUG
 
