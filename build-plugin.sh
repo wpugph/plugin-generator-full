@@ -4,16 +4,16 @@
 source build-plugin.cfg
 
 cd $DEFAULT_DIR
-printf "Plugin name: "
+printf "Plugin name (capitalize word to utilize camel cases): "
 read NAME
 
-printf "Destination folder: "
+printf "Destination folder(slug): "
 read FOLDER
 
 printf "Include Grunt support? (y/n): "
 read GRUNT
 
-printf "Has git support configured? (y/n): "
+printf "Has git support configured (make sure it is empty)? (y/n): "
 read NEWREPO
 
 DEFAULT_CLASS=${DEFAULT_NAME// /_}
