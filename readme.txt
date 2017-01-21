@@ -4,7 +4,7 @@ Donate link: https://carl.alber2.com/
 Tags: wordpress, plugin, template
 Requires at least: 3.9
 Tested up to: 4.0
-Stable tag: 1.0
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,12 +28,12 @@ Installing "WordPress Plugin Template" can be done either by searching for "Word
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * 2017-01-01
 * Initial release
 
 == Upgrade Notice ==
 
-= 1.0 =
+= 1.0.0 =
 * 2017-01-01
 * Initial release

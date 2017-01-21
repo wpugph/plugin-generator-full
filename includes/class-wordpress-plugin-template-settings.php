@@ -323,7 +323,7 @@ class WordPress_Plugin_Template_Settings {
 
 		// Build page HTML.
 		$html = '<div class="wrap" id="' . $this->parent->_token . '_settings">' . "\n";
-		$html .= '<h2>' . __( 'Plugin Settings' , 'wordpress-plugin-template' ) . '</h2>' . "\n";
+		$html .= '<h2>' . __( 'WordPress Plugin Template Settings' , 'wordpress-plugin-template' ) . '</h2>' . "\n";
 
 		$tab = '';
 		if ( isset( $_GET['tab'] ) && $_GET['tab'] ) { // @codingStandardsIgnoreLine
