@@ -44,6 +44,7 @@ echo "Removing git files..."
 #$FOLDER=$DEFAULT_DIR
 
 rm -rf .git
+rm .gitignore
 rm README.md
 rm build-plugin.sh
 rm build-plugin.cfg
