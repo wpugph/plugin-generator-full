@@ -139,8 +139,8 @@ cp class-$SLUG.php class-$SLUG.tmp
 sed "s/$DEFAULT_AUTHOR/$AUTHOR/g" class-$SLUG.tmp > class-$SLUG.php
 rm class-$SLUG.tmp
 
-mv class-$DEFAULT_SLUG-settings.php class-$SLUG-settings.php
 
+mv class-$DEFAULT_SLUG-settings.php class-$SLUG-settings.php
 
 cp class-$SLUG-settings.php class-$SLUG-settings.tmp
 sed "s/$DEFAULT_CLASS/$CLASS/g" class-$SLUG-settings.tmp > class-$SLUG-settings.php
@@ -162,6 +162,28 @@ cp class-$SLUG-settings.php class-$SLUG-settings.tmp
 sed "s/$DEFAULT_AUTHOR/$AUTHOR/g" class-$SLUG-settings.tmp > class-$SLUG-settings.php
 rm class-$SLUG-settings.tmp
 
+
+mv class-$DEFAULT_SLUG-main.php class-$SLUG-main.php
+
+cp class-$SLUG-main.php class-$SLUG-main.tmp
+sed "s/$DEFAULT_CLASS/$CLASS/g" class-$SLUG-main.tmp > class-$SLUG-main.php
+rm class-$SLUG-main.tmp
+
+cp class-$SLUG-main.php class-$SLUG-main.tmp
+sed "s/$DEFAULT_TOKEN/$TOKEN/g" class-$SLUG-main.tmp > class-$SLUG-main.php
+rm class-$SLUG-main.tmp
+
+cp class-$SLUG-main.php class-$SLUG-main.tmp
+sed "s/$DEFAULT_SLUG/$SLUG/g" class-$SLUG-main.tmp > class-$SLUG-main.php
+rm class-$SLUG-main.tmp
+
+cp class-$SLUG-main.php class-$SLUG-main.tmp
+sed "s/$DEFAULT_NAME/$NAME/g" class-$SLUG-main.tmp > class-$SLUG-main.php
+rm class-$SLUG-main.tmp
+
+cp class-$SLUG-main.php class-$SLUG-main.tmp
+sed "s/$DEFAULT_AUTHOR/$AUTHOR/g" class-$SLUG-main.tmp > class-$SLUG-main.php
+rm class-$SLUG-main.tmp
 
 cd lib
 mv class-$DEFAULT_SLUG-post-type.php class-$SLUG-post-type.php
