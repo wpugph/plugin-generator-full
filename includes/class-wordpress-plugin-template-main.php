@@ -15,6 +15,65 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class used for the main plugin functions.
  */
 class WordPress_Plugin_Template_Main {
+	/**
+	 * TODO: chnage function name and fill in blanks.
+	 */
+	public function register_cpt1() {
+		$post_type = '';
+		$plural = '';
+		$single = '';
+		$description = '';
+
+		$options = array(
+			'hierarchical' => true,
+			'public' => true,
+			'show_ui' => true,
+			'show_in_nav_menus' => true,
+			'show_tagcloud' => true,
+			'meta_box_cb' => null,
+			'show_admin_column' => true,
+			'show_in_quick_edit' => true,
+			'update_count_callback' => '',
+			'show_in_rest'          => true,
+			'rest_base'             => $taxonomy,
+			'rest_controller_class' => 'WP_REST_Terms_Controller',
+			'query_var' => $taxonomy,
+			'rewrite' => true,
+			'sort' => '',
+		);
+
+		$this->register_post_type( $post_type, $plural, $single, $description, $options );
+	}
+
+	/**
+	 * TODO: change function name and fill in blanks.
+	 */
+	public function register_taxonomy1() {
+		$taxonomy = '';
+		$plural = '';
+		$single = '';
+		$post_types = array( '' );
+
+		$taxonomy_args = array(
+			'hierarchical' => true,
+			'public' => true,
+			'show_ui' => true,
+			'show_in_nav_menus' => true,
+			'show_tagcloud' => true,
+			'meta_box_cb' => null,
+			'show_admin_column' => true,
+			'show_in_quick_edit' => true,
+			'update_count_callback' => '',
+			'show_in_rest'          => true,
+			'rest_base'             => $taxonomy,
+			'rest_controller_class' => 'WP_REST_Terms_Controller',
+			'query_var' => $taxonomy,
+			'rewrite' => true,
+			'sort' => '',
+		);
+
+		$this->register_taxonomy( $taxonomy, $plural, $single, $post_types, $taxonomy_args );
+	}
 
 	/**
 	 * Wrapper function to register a new post type.

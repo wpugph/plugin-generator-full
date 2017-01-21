@@ -146,6 +146,10 @@ class WordPress_Plugin_Template {
 			$this->admin = new WordPress_Plugin_Template_Admin_API();
 		}
 
+//		$custom = new WordPress_Plugin_Template_Main;
+//		$custom->register_taxonomy1();
+//		$custom->register_cpt1();
+
 		// Handle localisation.
 		$this->load_plugin_textdomain();
 		add_action( 'init', array( $this, 'load_localisation' ), 0 );
