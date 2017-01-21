@@ -252,7 +252,7 @@ fi
 if [ "$NEWREPO" == "y" ]; then
 	cd $FOLDER
 	git add *
-	git commit -m "Initialize starting files for $NAME"
+	git commit -m "Initialize $NAME Plugin starting files"
 	git push origin master
 fi
 
