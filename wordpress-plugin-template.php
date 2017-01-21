@@ -37,12 +37,21 @@ require_once( 'includes/lib/class-wordpress-plugin-template-taxonomy.php' );
  * @return object WordPress_Plugin_Template
  */
 function wordpress_plugin_template() {
-	// Change this for every plugin version increment.
+	// Plugin main variables.
 	$latest_plugin_version = '1.0.0';
-	$instance = WordPress_Plugin_Template::instance( __FILE__, $latest_plugin_version );
+	$settings_prefix = 'plg1_';
+
+	$pluginoptions = array(
+		'settings_prefix' => $settings_prefix,
+	);
+
+	$instance = Atest_2::instance( __FILE__,
+		$latest_plugin_version,
+		$pluginoptions
+	);
 
 	if ( is_null( $instance->settings ) ) {
-		$instance->settings = WordPress_Plugin_Template_Settings::instance( $instance );
+		$instance->settings = Atest_2_Settings::instance( $instance );
 	}
 
 	return $instance;

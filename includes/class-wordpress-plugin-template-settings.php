@@ -61,7 +61,7 @@ class WordPress_Plugin_Template_Settings {
 		$this->parent = $parent;
 
 		// Change this to make your plugin settings unique.
-		$this->base = 'pdhs1_';
+		$this->base = $parent->base;
 
 		// Initialise settings.
 		add_action( 'init', array( $this, 'init_settings' ), 11 );

@@ -98,17 +98,28 @@ class WordPress_Plugin_Template {
 	public $script_suffix;
 
 	/**
+	 * Array for plugin settings.
+	 *
+	 * @var     array
+	 * @access  public
+	 * @since   1.0.0
+	 */
+	public $pluginoptions;
+
+	/**
 	 * Constructor function.
 	 *
 	 * @access  public
 	 * @since   1.0.0
 	 * @param string $file Name of this file.
 	 * @param string $version Version of this plugin.
+	 * @param array  $pluginoptions Contains various options for the plugin.
 	 * @return  void
 	 */
-	public function __construct( $file = '', $version = '1.0.0' ) {
+	public function __construct( $file = '', $version = '1.0.0', $pluginoptions = array() ) {
 		$this->_version = $version;
 		$this->_token = 'wordpress_plugin_template';
+		$this->base = $pluginoptions['settings_prefix'];
 
 		// Load plugin environment variables.
 		$this->file = $file;
@@ -267,9 +278,10 @@ class WordPress_Plugin_Template {
 	 * @see WordPress_Plugin_Template()
 	 * @param string $file Name of this file.
 	 * @param string $version Version of this plugin.
+	 * @param array  $pluginoptions Contains various options for the plugin.
 	 * @return Main WordPress_Plugin_Template instance
 	 */
-	public static function instance( $file = '', $version = '1.0.0' ) {
+	public static function instance( $file = '', $version = '1.0.0', $pluginoptions = array() ) {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self( $file, $version );
 		}
