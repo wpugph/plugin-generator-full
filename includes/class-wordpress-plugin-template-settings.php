@@ -263,6 +263,7 @@ class WordPress_Plugin_Template_Settings {
 		if ( is_array( $this->settings ) ) {
 
 			// Check posted/selected tab.
+			// TODO: Do a more proper input validation.
 			$current_section = '';
 			if ( isset( $_POST['tab'] ) && $_POST['tab'] ) { // @codingStandardsIgnoreLine
 				$current_section = $_POST['tab'];
