@@ -19,27 +19,30 @@ class WordPress_Plugin_Template_Main {
 	 * TODO: chnage function name and fill in blanks.
 	 */
 	public function register_cpt1() {
-		$post_type = '';
+		$post_type = ''; // Normally lowercase with underscores.
 		$plural = '';
 		$single = '';
 		$description = '';
 
 		$options = array(
-			'hierarchical' => true,
 			'public' => true,
+			'publicly_queryable' => true,
+			'exclude_from_search' => false,
 			'show_ui' => true,
+			'show_in_menu' => true,
 			'show_in_nav_menus' => true,
-			'show_tagcloud' => true,
-			'meta_box_cb' => null,
-			'show_admin_column' => true,
-			'show_in_quick_edit' => true,
-			'update_count_callback' => '',
-			'show_in_rest'          => true,
-			'rest_base'             => $taxonomy,
-			'rest_controller_class' => 'WP_REST_Terms_Controller',
-			'query_var' => $taxonomy,
+			'query_var' => true,
+			'can_export' => true,
 			'rewrite' => true,
-			'sort' => '',
+			'capability_type' => 'post',
+			'has_archive' => true,
+			'hierarchical' => true,
+			'show_in_rest'       	=> true,
+	  		'rest_base'          	=> $post_type,
+	  		'rest_controller_class' => 'WP_REST_Posts_Controller',
+			'supports' => array( 'title', 'editor', 'excerpt', 'comments', 'thumbnail' ),
+			'menu_position' => 5,
+			'menu_icon' => 'dashicons-admin-post',
 		);
 
 		$this->register_post_type( $post_type, $plural, $single, $description, $options );
