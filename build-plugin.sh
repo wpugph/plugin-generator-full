@@ -10,10 +10,10 @@ read NAME
 printf "Destination folder: "
 read FOLDER
 
-printf "Include Grunt support (y/n): "
+printf "Include Grunt support? (y/n): "
 read GRUNT
 
-printf "Initialise new git repo (y/n): "
+printf "Has git support configured? (y/n): "
 read NEWREPO
 
 DEFAULT_CLASS=${DEFAULT_NAME// /_}
@@ -233,9 +233,10 @@ rm class-$SLUG-admin-api.tmp
 
 
 if [ "$NEWREPO" == "y" ]; then
-	echo "Initialising new git repo..."
+	echo "Initialising assigned git repo..."
 	cd ../..
 	git init
+	git remote add origin $REMOTEREPO
 fi
 
 #if [ "$LOCALSETUP" == "y" ]; then
@@ -247,6 +248,11 @@ fi
 
 #fi
 
-
+if [ "$NEWREPO" == "y" ]; then
+	cd $FOLDER
+	git add *
+	git commit -m "Initialize starting files for $NAME"
+	git push origin master
+fi
 
 echo "Complete!"
