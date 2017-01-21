@@ -45,13 +45,13 @@ function wordpress_plugin_template() {
 		'settings_prefix' => $settings_prefix,
 	);
 
-	$instance = Atest_2::instance( __FILE__,
+	$instance = WordPress_Plugin_Template::instance( __FILE__,
 		$latest_plugin_version,
 		$pluginoptions
 	);
 
 	if ( is_null( $instance->settings ) ) {
-		$instance->settings = Atest_2_Settings::instance( $instance );
+		$instance->settings = WordPress_Plugin_Template_Settings::instance( $instance );
 	}
 
 	return $instance;

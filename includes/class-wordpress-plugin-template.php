@@ -283,7 +283,7 @@ class WordPress_Plugin_Template {
 	 */
 	public static function instance( $file = '', $version = '1.0.0', $pluginoptions = array() ) {
 		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self( $file, $version );
+			self::$_instance = new self( $file, $version, $pluginoptions );
 		}
 		return self::$_instance;
 	} // End instance ()
