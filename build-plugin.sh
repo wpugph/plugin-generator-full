@@ -1,8 +1,9 @@
 #!/bin/bash
 
-DEFAULT_DIR="/Applications/XAMPP/htdocs/test1/wp-content/plugins/"
-cd $DEFAULT_DIR
+# Read separate config file
+source build-plugin.cfg
 
+cd $DEFAULT_DIR
 printf "Plugin name: "
 read NAME
 
@@ -15,30 +16,37 @@ read GRUNT
 printf "Initialise new git repo (y/n): "
 read NEWREPO
 
-DEFAULT_NAME="WordPress Plugin Template"
 DEFAULT_CLASS=${DEFAULT_NAME// /_}
 DEFAULT_TOKEN=$( tr '[A-Z]' '[a-z]' <<< $DEFAULT_CLASS)
 DEFAULT_SLUG=${DEFAULT_TOKEN//_/-}
-DEFAULT_SMALLCASE="wordpress_plugin_template"
-DEFAULT_AUTHOR="Carl A"
 
 CLASS=${NAME// /_}
 TOKEN=$( tr '[A-Z]' '[a-z]' <<< $CLASS)
 SLUG=${TOKEN//_/-}
 SMALLCASE=TOKEN
-AUTHOR="Carl Alberto"
 
-git clone https://github.com/wpugph/plugin-generator-full $FOLDER/$SLUG
+if [ "$LOCALSETUP" == "y" ]; then
+	# local source
+	TEMPFOLDER=$FOLDER
+	ORIGFOLDER=$FOLDER
+	mkdir -p $TEMPFOLDER
+	cd $TEMPFOLDER
+	cp -r $LOCALSOURCE $TEMPFOLDER
+	cd $SLUG
+else
+	# GitHub source pull
+	git clone $GITSOURCE $FOLDER/$SLUG
+	mkdir -p $FOLDER
+	cd $FOLDER/$SLUG
+fi
 
 echo "Removing git files..."
 #$FOLDER=$DEFAULT_DIR
 
-mkdir -p $FOLDER
-cd $FOLDER/$SLUG
-
 rm -rf .git
 rm README.md
 rm build-plugin.sh
+rm build-plugin.cfg
 rm changelog.txt
 
 if [ "$GRUNT" == "n" ]; then
@@ -229,5 +237,16 @@ if [ "$NEWREPO" == "y" ]; then
 	cd ../..
 	git init
 fi
+
+#if [ "$LOCALSETUP" == "y" ]; then
+	cd $DEFAULT_DIR
+	mv $FOLDER $FOLDER-tmp
+	mv $FOLDER-tmp/$SLUG $FOLDER
+	rmdir $FOLDER-tmp
+#else
+
+#fi
+
+
 
 echo "Complete!"
