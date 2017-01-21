@@ -1,46 +1,52 @@
 #!/bin/bash
 
-DEFAULT_DIR="/Applications/XAMPP/htdocs/test1/wp-content/plugins/"
-cd $DEFAULT_DIR
+# Read separate config file
+source build-plugin.cfg
 
-printf "Plugin name: "
+cd $DEFAULT_DIR
+printf "Plugin name (capitalize word to utilize camel cases): "
 read NAME
 
-printf "Destination folder: "
+printf "Destination folder(slug): "
 read FOLDER
 
-printf "Include Grunt support (y/n): "
+printf "Include Grunt support? (y/n): "
 read GRUNT
 
-printf "Initialise new git repo (y/n): "
+printf "Has git support configured (make sure it is empty)? (y/n): "
 read NEWREPO
 
-DEFAULT_NAME="WordPress Plugin Template"
 DEFAULT_CLASS=${DEFAULT_NAME// /_}
 DEFAULT_TOKEN=$( tr '[A-Z]' '[a-z]' <<< $DEFAULT_CLASS)
 DEFAULT_SLUG=${DEFAULT_TOKEN//_/-}
-DEFAULT_SMALLCASE="wordpress_plugin_template"
-DEFAULT_AUTHOR="Carl A"
-DEFAULT_SETTINGS_PREFIX="pdhs1_"
 
 CLASS=${NAME// /_}
 TOKEN=$( tr '[A-Z]' '[a-z]' <<< $CLASS)
 SLUG=${TOKEN//_/-}
 SMALLCASE=TOKEN
-AUTHOR="Carl Alberto"
-SETTINGS_PREFIX="pdhs1_"
 
-git clone https://github.com/wpugph/plugin-generator-full $FOLDER/$SLUG
+if [ "$LOCALSETUP" == "y" ]; then
+	# local source
+	TEMPFOLDER=$FOLDER
+	ORIGFOLDER=$FOLDER
+	mkdir -p $TEMPFOLDER
+	cd $TEMPFOLDER
+	cp -r $LOCALSOURCE $TEMPFOLDER
+	cd $SLUG
+else
+	# GitHub source pull
+	git clone $GITSOURCE $FOLDER/$SLUG
+	mkdir -p $FOLDER
+	cd $FOLDER/$SLUG
+fi
 
 echo "Removing git files..."
 #$FOLDER=$DEFAULT_DIR
 
-mkdir -p $FOLDER
-cd $FOLDER/$SLUG
-
 rm -rf .git
 rm README.md
 rm build-plugin.sh
+rm build-plugin.cfg
 rm changelog.txt
 
 if [ "$GRUNT" == "n" ]; then
@@ -227,9 +233,26 @@ rm class-$SLUG-admin-api.tmp
 
 
 if [ "$NEWREPO" == "y" ]; then
-	echo "Initialising new git repo..."
+	echo "Initialising assigned git repo..."
 	cd ../..
 	git init
+	git remote add origin $REMOTEREPO
+fi
+
+#if [ "$LOCALSETUP" == "y" ]; then
+	cd $DEFAULT_DIR
+	mv $FOLDER $FOLDER-tmp
+	mv $FOLDER-tmp/$SLUG $FOLDER
+	rmdir $FOLDER-tmp
+#else
+
+#fi
+
+if [ "$NEWREPO" == "y" ]; then
+	cd $FOLDER
+	git add *
+	git commit -m "Initialize starting files for $NAME"
+	git push origin master
 fi
 
 echo "Complete!"

@@ -1,5 +1,9 @@
 *** WordPress Plugin Template Changelog ***
 
+2017.01.21 - Forked to have a modernized flavor
+- Added external config file
+- Updated base code to comply PHPCS WordPress standards
+
 2014.08.05 - version 3.0.0
  * New - Library for registering post types
  * New - Library for registering taxonomies
