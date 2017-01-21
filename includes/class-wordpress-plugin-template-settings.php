@@ -265,7 +265,7 @@ class WordPress_Plugin_Template_Settings {
 			// Check posted/selected tab.
 			$current_section = '';
 			if ( isset( $_POST['tab'] ) && $_POST['tab'] ) { // @codingStandardsIgnoreLine
-				$current_section = $_POST['tab'] );
+				$current_section = $_POST['tab'];
 			} else {
 				if ( isset( $_GET['tab'] ) && $_GET['tab'] ) { // @codingStandardsIgnoreLine
 					$current_section = $_GET['tab'];
