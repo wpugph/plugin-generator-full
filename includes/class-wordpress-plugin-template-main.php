@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WordPress_Plugin_Template_Main {
 	/**
 	 * TODO: chnage function name and fill in blanks.
+	 * For Dashicons, see https://developer.wordpress.org/resource/dashicons
 	 */
 	public function register_cpt1() {
 		$post_type = ''; // Normally lowercase with underscores.
