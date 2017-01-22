@@ -17,6 +17,55 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WordPress_Plugin_Template {
 
 	/**
+	 * Constructor function.
+	 *
+	 * @access  public
+	 * @since   1.0.0
+	 * @param string $file Name of this file.
+	 * @param string $version Version of this plugin.
+	 * @param array  $pluginoptions Contains various options for the plugin.
+	 * @return  void
+	 */
+	public function __construct( $file = '', $version = '1.0.0', $pluginoptions = array() ) {
+		$this->_version = $version;
+		$this->_token = 'wordpress_plugin_template';
+		$this->base = $pluginoptions['settings_prefix'];
+
+		// Load plugin environment variables.
+		$this->file = $file;
+		$this->dir = dirname( $this->file );
+		$this->assets_dir = trailingslashit( $this->dir ) . 'assets';
+		$this->assets_url = esc_url( trailingslashit( plugins_url( '/assets/', $this->file ) ) );
+
+		$this->script_suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+		register_activation_hook( $this->file, array( $this, 'install' ) );
+
+		register_deactivation_hook( $this->file, array( $this, 'plugin_deactivated' ) );
+
+		// Load frontend JS & CSS.
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 10 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 10 );
+
+		// Load admin JS & CSS.
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 10, 1 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_styles' ), 10, 1 );
+
+		// Load API for generic admin functions.
+		if ( is_admin() ) {
+			$this->admin = new WordPress_Plugin_Template_Admin_API();
+		}
+
+//		$custom = new WordPress_Plugin_Template_Main;
+//		$custom->register_taxonomy1();
+//		$custom->register_cpt1();
+
+		// Handle localisation.
+		$this->load_plugin_textdomain();
+		add_action( 'init', array( $this, 'load_localisation' ), 0 );
+	} // End __construct ()
+
+	/**
 	 * The single instance of WordPress_Plugin_Template.
 	 *
 	 * @var 	object
@@ -105,55 +154,6 @@ class WordPress_Plugin_Template {
 	 * @since   1.0.0
 	 */
 	public $pluginoptions;
-
-	/**
-	 * Constructor function.
-	 *
-	 * @access  public
-	 * @since   1.0.0
-	 * @param string $file Name of this file.
-	 * @param string $version Version of this plugin.
-	 * @param array  $pluginoptions Contains various options for the plugin.
-	 * @return  void
-	 */
-	public function __construct( $file = '', $version = '1.0.0', $pluginoptions = array() ) {
-		$this->_version = $version;
-		$this->_token = 'wordpress_plugin_template';
-		$this->base = $pluginoptions['settings_prefix'];
-
-		// Load plugin environment variables.
-		$this->file = $file;
-		$this->dir = dirname( $this->file );
-		$this->assets_dir = trailingslashit( $this->dir ) . 'assets';
-		$this->assets_url = esc_url( trailingslashit( plugins_url( '/assets/', $this->file ) ) );
-
-		$this->script_suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
-		register_activation_hook( $this->file, array( $this, 'install' ) );
-
-		register_deactivation_hook( $this->file, array( $this, 'plugin_deactivated' ) );
-
-		// Load frontend JS & CSS.
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 10 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 10 );
-
-		// Load admin JS & CSS.
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 10, 1 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_styles' ), 10, 1 );
-
-		// Load API for generic admin functions.
-		if ( is_admin() ) {
-			$this->admin = new WordPress_Plugin_Template_Admin_API();
-		}
-
-//		$custom = new WordPress_Plugin_Template_Main;
-//		$custom->register_taxonomy1();
-//		$custom->register_cpt1();
-
-		// Handle localisation.
-		$this->load_plugin_textdomain();
-		add_action( 'init', array( $this, 'load_localisation' ), 0 );
-	} // End __construct ()
 
 	/**
 	 * Load frontend CSS.
