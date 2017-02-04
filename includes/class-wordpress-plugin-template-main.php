@@ -32,6 +32,7 @@ class WordPress_Plugin_Template_Main {
 			'show_ui' => true,
 			'show_in_menu' => true,
 			'show_in_nav_menus' => true,
+			'show_in_admin_bar' => true,
 			'query_var' => true,
 			'can_export' => true,
 			'rewrite' => true,

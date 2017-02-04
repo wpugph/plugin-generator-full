@@ -4,7 +4,7 @@
 source build-plugin.cfg
 
 cd $DEFAULT_DIR
-printf "Plugin name (capitalize word to utilize camel cases): "
+printf "Plugin name (capitalize word to utilize camel cases - Not mre than 20 chars): "
 read NAME
 
 printf "Destination folder(slug): "
